@@ -1,0 +1,3 @@
+[submodule "docker-user-image"]
+	path = docker-user-image
+	url = https://github.com/PhasecoreX/docker-user-image.git
