@@ -12,7 +12,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -37,7 +41,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-alpine-arm
+    tags: 2.7-alpine-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -52,7 +56,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-alpine-arm64
+    tags: 2.7-alpine-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -61,17 +65,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 2.7-alpine
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:2.7-alpine
-    template: phasecorex/user-python:2.7-alpine-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -87,7 +88,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v7 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -112,7 +117,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-slim-arm
+    tags: 2.7-slim-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -127,7 +132,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-slim-arm64
+    tags: 2.7-slim-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -136,17 +141,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 2.7-slim
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:2.7-slim
-    template: phasecorex/user-python:2.7-slim-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -162,7 +164,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v7 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -187,7 +193,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-arm
+    tags: 2.7-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -202,7 +208,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 2.7-arm64
+    tags: 2.7-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -211,17 +217,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 2.7
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:2.7
-    template: phasecorex/user-python:2.7-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -237,7 +240,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -262,7 +269,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-alpine-arm
+    tags: 3.7-alpine-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -277,7 +284,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-alpine-arm64
+    tags: 3.7-alpine-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -286,17 +293,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.7-alpine
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:3.7-alpine
-    template: phasecorex/user-python:3.7-alpine-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -312,7 +316,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v7 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -337,7 +345,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-slim-arm
+    tags: 3.7-slim-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -352,7 +360,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-slim-arm64
+    tags: 3.7-slim-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -361,17 +369,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.7-slim
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:3.7-slim
-    template: phasecorex/user-python:3.7-slim-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -387,7 +392,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v7 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -412,7 +421,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-arm
+    tags: 3.7-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -427,7 +436,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: 3.7-arm64
+    tags: 3.7-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -436,17 +445,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.7
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:3.7
-    template: phasecorex/user-python:3.7-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -462,7 +468,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-python amd64 arm32v7 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -487,7 +497,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: latest-arm
+    tags: latest-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -502,7 +512,7 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-python
-    tags: latest-arm64
+    tags: latest-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
@@ -511,15 +521,12 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: latest
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-python:latest
-    template: phasecorex/user-python:latest-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
