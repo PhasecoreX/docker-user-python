@@ -6,6 +6,8 @@ trigger:
   - master
   event:
   - push
+clone:
+  disable: true
 
 steps:
 - name: register-qemu
@@ -54,6 +56,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -74,6 +78,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:2.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -94,6 +100,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -108,6 +116,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v6
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -161,6 +173,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -181,6 +195,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -201,6 +217,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -215,6 +233,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v7
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -268,6 +290,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -288,6 +312,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -308,6 +334,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -322,6 +350,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v7
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -375,6 +407,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -395,6 +429,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -415,6 +451,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-alpine
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -429,6 +467,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v6
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -482,6 +524,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -502,6 +546,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -522,6 +568,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-slim
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -536,6 +584,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v7
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -589,6 +641,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -609,6 +663,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -629,6 +685,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -643,6 +701,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v7
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
@@ -696,6 +758,8 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:latest
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -716,6 +780,8 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:latest
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -736,6 +802,8 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:latest
+  depends_on:
+    - prepare
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -750,6 +818,10 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+  depends_on:
+    - docker-build-amd64
+    - docker-build-arm32v7
+    - docker-build-arm64v8
 
 volumes:
 - name: cache
