@@ -269,7 +269,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:2.7
+      - ARCH_IMG=amd64/python:2.7.15
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -289,7 +289,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:2.7
+      - ARCH_IMG=arm32v7/python:2.7.15
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -309,7 +309,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:2.7
+      - ARCH_IMG=arm64v8/python:2.7.15
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -590,7 +590,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:3.7
+      - ARCH_IMG=amd64/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -610,7 +610,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:3.7
+      - ARCH_IMG=arm32v7/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -630,7 +630,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:3.7
+      - ARCH_IMG=arm64v8/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -697,7 +697,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:latest
+      - ARCH_IMG=amd64/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -717,7 +717,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:latest
+      - ARCH_IMG=arm32v7/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -737,7 +737,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:latest
+      - ARCH_IMG=arm64v8/python:3.7.2
   volumes:
     - name: docker
       path: /var/lib/docker
