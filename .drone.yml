@@ -179,7 +179,7 @@ steps:
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
-    - ./generate_manifest.sh user-python arm64v8 arm32v6 amd64
+    - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
   volumes:
@@ -204,6 +204,28 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-alpine
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+- name: docker-build-arm32v7
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-python
+    create_repository: true
+    use_cache: true
+    tags: 
+      - 2-alpine-arm32v7
+      - 2.7-alpine-arm32v7
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v7/python:2.7-alpine
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -580,7 +602,7 @@ steps:
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
-    - ./generate_manifest.sh user-python arm64v8 arm32v6 amd64
+    - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
   volumes:
@@ -604,6 +626,27 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.4-alpine
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+- name: docker-build-arm32v7
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-python
+    create_repository: true
+    use_cache: true
+    tags: 
+      - 3.4-alpine-arm32v7
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v7/python:3.4-alpine
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -952,7 +995,7 @@ steps:
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
-    - ./generate_manifest.sh user-python arm64v8 arm32v6 amd64
+    - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
   volumes:
@@ -976,6 +1019,27 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-alpine
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+- name: docker-build-arm32v7
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-python
+    create_repository: true
+    use_cache: true
+    tags: 
+      - 3.5-alpine-arm32v7
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v7/python:3.5-alpine
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1324,7 +1388,7 @@ steps:
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
-    - ./generate_manifest.sh user-python arm64v8 arm32v6 amd64
+    - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
   volumes:
@@ -1348,6 +1412,27 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-alpine
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+- name: docker-build-arm32v7
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-python
+    create_repository: true
+    use_cache: true
+    tags: 
+      - 3.6-alpine-arm32v7
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v7/python:3.6-alpine
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1565,7 +1650,7 @@ steps:
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
-    - ./generate_manifest.sh user-python arm64v8 arm32v6 amd64
+    - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
   volumes:
@@ -1590,6 +1675,28 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-alpine
+  volumes:
+    - name: docker
+      path: /var/lib/docker
+
+- name: docker-build-arm32v7
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-python
+    create_repository: true
+    use_cache: true
+    tags: 
+      - 3-alpine-arm32v7
+      - 3.7-alpine-arm32v7
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v7/python:3.7-alpine
   volumes:
     - name: docker
       path: /var/lib/docker
