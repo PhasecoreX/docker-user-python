@@ -50,7 +50,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-arm64v8
       - 2.7-arm64v8
     context: docker-user-image
@@ -72,7 +72,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-arm32v7
       - 2.7-arm32v7
     context: docker-user-image
@@ -94,7 +94,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-arm32v5
       - 2.7-arm32v5
     context: docker-user-image
@@ -116,7 +116,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-amd64
       - 2.7-amd64
     context: docker-user-image
@@ -196,7 +196,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-alpine-arm64v8
       - 2.7-alpine-arm64v8
     context: docker-user-image
@@ -218,7 +218,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-alpine-arm32v7
       - 2.7-alpine-arm32v7
     context: docker-user-image
@@ -240,7 +240,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-alpine-arm32v6
       - 2.7-alpine-arm32v6
     context: docker-user-image
@@ -262,7 +262,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-alpine-amd64
       - 2.7-alpine-amd64
     context: docker-user-image
@@ -342,7 +342,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-slim-arm64v8
       - 2.7-slim-arm64v8
     context: docker-user-image
@@ -364,7 +364,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-slim-arm32v7
       - 2.7-slim-arm32v7
     context: docker-user-image
@@ -386,7 +386,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-slim-arm32v5
       - 2.7-slim-arm32v5
     context: docker-user-image
@@ -408,7 +408,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 2-slim-amd64
       - 2.7-slim-amd64
     context: docker-user-image
@@ -488,7 +488,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -509,7 +509,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -530,7 +530,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-arm32v5
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -551,7 +551,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian
@@ -619,7 +619,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-alpine-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -640,7 +640,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-alpine-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -661,7 +661,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-alpine-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -682,7 +682,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-alpine-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -750,7 +750,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-slim-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -771,7 +771,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-slim-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -792,7 +792,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-slim-arm32v5
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -813,7 +813,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.5-slim-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian
@@ -881,7 +881,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -902,7 +902,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -923,7 +923,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-arm32v5
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -944,7 +944,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian
@@ -1012,7 +1012,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-alpine-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -1033,7 +1033,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-alpine-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -1054,7 +1054,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-alpine-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -1075,7 +1075,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-alpine-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -1143,7 +1143,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-slim-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -1164,7 +1164,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-slim-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -1185,7 +1185,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-slim-arm32v5
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian.qemu
@@ -1206,7 +1206,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-slim-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.debian
@@ -1274,7 +1274,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-alpine-arm64v8
       - 3.7-alpine-arm64v8
     context: docker-user-image
@@ -1296,7 +1296,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-alpine-arm32v7
       - 3.7-alpine-arm32v7
     context: docker-user-image
@@ -1318,7 +1318,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-alpine-arm32v6
       - 3.7-alpine-arm32v6
     context: docker-user-image
@@ -1340,7 +1340,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-alpine-amd64
       - 3.7-alpine-amd64
     context: docker-user-image
@@ -1420,7 +1420,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-slim-arm64v8
       - 3.7-slim-arm64v8
     context: docker-user-image
@@ -1442,7 +1442,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-slim-arm32v7
       - 3.7-slim-arm32v7
     context: docker-user-image
@@ -1464,7 +1464,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-slim-arm32v5
       - 3.7-slim-arm32v5
     context: docker-user-image
@@ -1486,7 +1486,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-slim-amd64
       - 3.7-slim-amd64
     context: docker-user-image
@@ -1566,7 +1566,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-arm64v8
       - 3.7-arm64v8
       - latest-arm64v8
@@ -1589,7 +1589,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-arm32v7
       - 3.7-arm32v7
       - latest-arm32v7
@@ -1612,7 +1612,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-arm32v5
       - 3.7-arm32v5
       - latest-arm32v5
@@ -1635,7 +1635,7 @@ steps:
     repo: phasecorex/user-python
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3-amd64
       - 3.7-amd64
       - latest-amd64
@@ -1691,4 +1691,84 @@ volumes:
 
 depends_on:
   - prepare
+
+---
+kind: pipeline
+name: notify
+trigger:
+  branch:
+  - master
+  event:
+  - push
+  status:
+  - success
+  - failure
+clone:
+  disable: true
+
+steps:
+- name: send-notification
+  image: appleboy/drone-discord
+  allow_failure: true
+  settings:
+    webhook_id:
+      from_secret: discord_webhook_id
+    webhook_token:
+      from_secret: discord_webhook_token
+    message: >
+      {{#success build.status}}
+        **{{repo.name}}**: Build #{{build.number}} on {{build.branch}} branch succeeded!
+      {{else}}
+        **{{repo.name}}**: Build #{{build.number}} on {{build.branch}} branch failed. Fix me please. {{build.link}}
+      {{/success}}
+
+depends_on:
+  - user-python-2
+  - user-python-2-alpine
+  - user-python-2-slim
+  - user-python-3.5
+  - user-python-3.5-alpine
+  - user-python-3.5-slim
+  - user-python-3.6
+  - user-python-3.6-alpine
+  - user-python-3.6-slim
+  - user-python-3-alpine
+  - user-python-3-slim
+  - user-python-3
+
+---
+kind: pipeline
+name: downstream-build
+trigger:
+  branch:
+  - master
+  event:
+  - push
+clone:
+  disable: true
+
+steps:
+- name: trigger
+  image: plugins/downstream
+  settings:
+    server: https://ci.pcxserver.com
+    token:
+      from_secret: drone_token
+    fork: true
+    repositories:
+      - PhasecoreX/docker-red-discordbot
+
+depends_on:
+  - user-python-2
+  - user-python-2-alpine
+  - user-python-2-slim
+  - user-python-3.5
+  - user-python-3.5-alpine
+  - user-python-3.5-slim
+  - user-python-3.6
+  - user-python-3.6-alpine
+  - user-python-3.6-slim
+  - user-python-3-alpine
+  - user-python-3-slim
+  - user-python-3
 
