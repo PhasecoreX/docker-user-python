@@ -1723,18 +1723,18 @@ steps:
       {{/success}}
 
 depends_on:
-  - user-python-2
-  - user-python-2-alpine
-  - user-python-2-slim
+  - user-python-2.7
+  - user-python-2.7-alpine
+  - user-python-2.7-slim
   - user-python-3.5
   - user-python-3.5-alpine
   - user-python-3.5-slim
   - user-python-3.6
   - user-python-3.6-alpine
   - user-python-3.6-slim
-  - user-python-3-alpine
-  - user-python-3-slim
-  - user-python-3
+  - user-python-3.7-alpine
+  - user-python-3.7-slim
+  - user-python-3.7
 
 ---
 kind: pipeline
@@ -1759,16 +1759,16 @@ steps:
       - PhasecoreX/docker-red-discordbot
 
 depends_on:
-  - user-python-2
-  - user-python-2-alpine
-  - user-python-2-slim
+  - user-python-2.7
+  - user-python-2.7-alpine
+  - user-python-2.7-slim
   - user-python-3.5
   - user-python-3.5-alpine
   - user-python-3.5-slim
   - user-python-3.6
   - user-python-3.6-alpine
   - user-python-3.6-slim
-  - user-python-3-alpine
-  - user-python-3-slim
-  - user-python-3
+  - user-python-3.7-alpine
+  - user-python-3.7-slim
+  - user-python-3.7
 
