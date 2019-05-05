@@ -305,7 +305,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-2.7
 
 ---
 kind: pipeline
@@ -451,7 +451,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-2.7-alpine
 
 ---
 kind: pipeline
@@ -582,7 +582,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-2.7-slim
 
 ---
 kind: pipeline
@@ -713,7 +713,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.5
 
 ---
 kind: pipeline
@@ -844,7 +844,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.5-alpine
 
 ---
 kind: pipeline
@@ -975,7 +975,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.5-slim
 
 ---
 kind: pipeline
@@ -1106,7 +1106,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.6
 
 ---
 kind: pipeline
@@ -1237,7 +1237,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.6-alpine
 
 ---
 kind: pipeline
@@ -1383,7 +1383,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.6-slim
 
 ---
 kind: pipeline
@@ -1529,7 +1529,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.7-alpine
 
 ---
 kind: pipeline
@@ -1690,7 +1690,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-python-3.7-slim
 
 ---
 kind: pipeline
