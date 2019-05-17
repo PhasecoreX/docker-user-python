@@ -3,6 +3,7 @@ Base Python image that steps down from root into a runtime-defined non-privilege
 
 [![Build Status](https://ci.pcxserver.com/api/badges/PhasecoreX/docker-user-python/status.svg)](https://ci.pcxserver.com/PhasecoreX/docker-user-python)
 [![Image Size](https://images.microbadger.com/badges/image/phasecorex/user-python.svg)](https://microbadger.com/images/phasecorex/user-python)
+[![Donate to support my code](https://img.shields.io/badge/Paypal-Donate-blue.svg)](https://paypal.me/pcx)
 
 ## For Developers
 Simply have your image use this image as it's base image:
