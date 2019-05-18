@@ -1755,6 +1755,7 @@ steps:
     token:
       from_secret: drone_token
     fork: true
+    last_successful: true
     repositories:
       - PhasecoreX/docker-red-discordbot
 
