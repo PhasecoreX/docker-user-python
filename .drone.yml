@@ -349,7 +349,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:2-stretch
+      - ARCH_IMG=arm64v8/python:2-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -371,7 +371,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:2-stretch
+      - ARCH_IMG=arm32v7/python:2-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -393,7 +393,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v5/python:2-stretch
+      - ARCH_IMG=arm32v5/python:2-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -415,7 +415,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:2-stretch
+      - ARCH_IMG=amd64/python:2-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -756,7 +756,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:3.5-stretch
+      - ARCH_IMG=arm64v8/python:3.5-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -777,7 +777,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:3.5-stretch
+      - ARCH_IMG=arm32v7/python:3.5-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -798,7 +798,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v5/python:3.5-stretch
+      - ARCH_IMG=arm32v5/python:3.5-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -819,7 +819,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:3.5-stretch
+      - ARCH_IMG=amd64/python:3.5-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1149,7 +1149,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:3.6-stretch
+      - ARCH_IMG=arm64v8/python:3.6-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1170,7 +1170,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:3.6-stretch
+      - ARCH_IMG=arm32v7/python:3.6-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1191,7 +1191,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v5/python:3.6-stretch
+      - ARCH_IMG=arm32v5/python:3.6-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1212,7 +1212,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:3.6-stretch
+      - ARCH_IMG=amd64/python:3.6-buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1574,7 +1574,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=aarch64
-      - ARCH_IMG=arm64v8/python:stretch
+      - ARCH_IMG=arm64v8/python:buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1597,7 +1597,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v7/python:stretch
+      - ARCH_IMG=arm32v7/python:buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1620,7 +1620,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian.qemu
     build_args:
       - QEMU_ARCH=arm
-      - ARCH_IMG=arm32v5/python:stretch
+      - ARCH_IMG=arm32v5/python:buster
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1643,7 +1643,7 @@ steps:
     dockerfile: docker-user-image/Dockerfile.debian
     build_args:
       - QEMU_ARCH=x86_64
-      - ARCH_IMG=amd64/python:stretch
+      - ARCH_IMG=amd64/python:buster
   volumes:
     - name: docker
       path: /var/lib/docker
