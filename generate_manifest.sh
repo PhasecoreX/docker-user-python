@@ -6,7 +6,7 @@ shift
 archs_filtered=${@}
 
 cat << EOF > ./.manifest.tmpl
-image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix build.tag "v"}}{{else}}latest{{/if}}
+image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
@@ -29,7 +29,7 @@ for arch in ${archs_filtered}; do
     esac
     cat << EOF >> ./.manifest.tmpl
   -
-    image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix build.tag "v"}}-{{/if}}${arch}
+    image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}${arch}
     platform:
       architecture: ${tag_arch}
       os: ${os}

@@ -129,7 +129,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-2-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2-alpine
   settings:
@@ -140,7 +140,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-2.7-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2.7-alpine
   settings:
@@ -275,7 +275,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-2-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2-slim
   settings:
@@ -286,7 +286,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-2.7-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2.7-slim
   settings:
@@ -421,7 +421,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-2
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2
   settings:
@@ -432,7 +432,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-2.7
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 2.7
   settings:
@@ -563,7 +563,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.5-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.5-alpine
   settings:
@@ -694,7 +694,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.5-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.5-slim
   settings:
@@ -825,7 +825,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.5
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.5
   settings:
@@ -956,7 +956,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.6-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.6-alpine
   settings:
@@ -1087,7 +1087,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.6-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.6-slim
   settings:
@@ -1218,7 +1218,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.6
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.6
   settings:
@@ -1353,7 +1353,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3-alpine
   settings:
@@ -1364,7 +1364,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-3.7-alpine
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.7-alpine
   settings:
@@ -1499,7 +1499,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3-slim
   settings:
@@ -1510,7 +1510,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-3.7-slim
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.7-slim
   settings:
@@ -1649,7 +1649,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3
   settings:
@@ -1660,7 +1660,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-3.7
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.7
   settings:
@@ -1671,7 +1671,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-latest
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: latest
   settings:
