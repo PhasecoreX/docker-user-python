@@ -58,6 +58,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-alpine
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -80,6 +81,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7-alpine
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -102,6 +104,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:2.7-alpine
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -124,6 +127,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-alpine
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -204,6 +208,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-slim
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -226,6 +231,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7-slim
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -248,6 +254,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:2.7-slim
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -270,6 +277,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-slim
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -350,6 +358,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2-buster
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -372,6 +381,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2-buster
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -394,6 +404,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:2-buster
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -416,6 +427,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2-buster
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -495,6 +507,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-alpine
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -516,6 +529,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-alpine
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -537,6 +551,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.5-alpine
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -558,6 +573,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-alpine
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -626,6 +642,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-slim
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -647,6 +664,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-slim
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -668,6 +686,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.5-slim
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -689,6 +708,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-slim
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -757,6 +777,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-buster
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -778,6 +799,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-buster
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -799,6 +821,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.5-buster
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -820,6 +843,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-buster
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -888,6 +912,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-alpine
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -909,6 +934,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-alpine
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -930,6 +956,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.6-alpine
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -951,6 +978,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-alpine
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1019,6 +1047,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-slim
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1040,6 +1069,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-slim
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1061,6 +1091,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.6-slim
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1082,6 +1113,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-slim
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1150,6 +1182,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-buster
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1171,6 +1204,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-buster
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1192,6 +1226,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.6-buster
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1213,6 +1248,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-buster
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1281,6 +1317,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-alpine
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1302,6 +1339,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-alpine
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1323,6 +1361,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.7-alpine
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1344,6 +1383,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-alpine
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1412,6 +1452,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-slim
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1433,6 +1474,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-slim
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1454,6 +1496,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.7-slim
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1475,6 +1518,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-slim
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1543,6 +1587,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-buster
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1564,6 +1609,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-buster
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1585,6 +1631,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.7-buster
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1606,6 +1653,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-buster
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1675,6 +1723,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.8-alpine
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1697,6 +1746,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.8-alpine
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1719,6 +1769,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.8-alpine
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1741,6 +1792,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.8-alpine
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1821,6 +1873,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.8-slim
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1843,6 +1896,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.8-slim
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1865,6 +1919,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.8-slim
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1887,6 +1942,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.8-slim
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1968,6 +2024,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:buster
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -1991,6 +2048,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:buster
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -2014,6 +2072,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:buster
+      - ARCH=arm32v5
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -2037,6 +2096,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:buster
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
