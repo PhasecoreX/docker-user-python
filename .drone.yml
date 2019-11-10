@@ -1,22 +1,5 @@
 ---
 kind: pipeline
-name: prepare
-trigger:
-  branch:
-  - master
-  event:
-  - push
-clone:
-  disable: true
-
-steps:
-- name: register-qemu
-  image: multiarch/qemu-user-static:register
-  command: [ "--reset" ]
-  privileged: true
-
----
-kind: pipeline
 name: user-python-2.7-alpine
 trigger:
   branch:
@@ -28,17 +11,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -48,7 +26,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-alpine-arm64v8
     repo: phasecorex/user-python
     tags:
       - 2-alpine-arm64v8
@@ -59,9 +37,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-alpine
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -71,7 +46,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-alpine-arm32v7
     repo: phasecorex/user-python
     tags:
       - 2-alpine-arm32v7
@@ -82,9 +57,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7-alpine
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -94,7 +66,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-alpine-arm32v6
     repo: phasecorex/user-python
     tags:
       - 2-alpine-arm32v6
@@ -105,9 +77,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:2.7-alpine
       - ARCH=arm32v6
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -117,7 +86,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-alpine-amd64
     repo: phasecorex/user-python
     tags:
       - 2-alpine-amd64
@@ -128,9 +97,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-alpine
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-2-alpine
   image: plugins/manifest
@@ -154,17 +120,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - prepare
-
 ---
 kind: pipeline
 name: user-python-2.7-slim
@@ -178,17 +133,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -198,7 +148,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-slim-arm64v8
     repo: phasecorex/user-python
     tags:
       - 2-slim-arm64v8
@@ -209,9 +159,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2.7-slim
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -221,7 +168,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-slim-arm32v7
     repo: phasecorex/user-python
     tags:
       - 2-slim-arm32v7
@@ -232,9 +179,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2.7-slim
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -244,7 +188,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-slim-arm32v5
     repo: phasecorex/user-python
     tags:
       - 2-slim-arm32v5
@@ -255,9 +199,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:2.7-slim
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -267,7 +208,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2.7-slim-amd64
     repo: phasecorex/user-python
     tags:
       - 2-slim-amd64
@@ -278,9 +219,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2.7-slim
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-2-slim
   image: plugins/manifest
@@ -304,17 +242,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-2.7-alpine
-
 ---
 kind: pipeline
 name: user-python-2.7
@@ -328,17 +255,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -348,7 +270,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2-buster-arm64v8
     repo: phasecorex/user-python
     tags:
       - 2-arm64v8
@@ -359,9 +281,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:2-buster
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -371,7 +290,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2-buster-arm32v7
     repo: phasecorex/user-python
     tags:
       - 2-arm32v7
@@ -382,9 +301,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:2-buster
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -394,7 +310,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2-buster-arm32v5
     repo: phasecorex/user-python
     tags:
       - 2-arm32v5
@@ -405,9 +321,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:2-buster
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -417,7 +330,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:2-buster-amd64
     repo: phasecorex/user-python
     tags:
       - 2-amd64
@@ -428,9 +341,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:2-buster
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-2
   image: plugins/manifest
@@ -454,17 +364,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-2.7-slim
-
 ---
 kind: pipeline
 name: user-python-3.5-alpine
@@ -478,17 +377,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -498,7 +392,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-alpine-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.5-alpine-arm64v8
@@ -508,9 +402,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-alpine
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -520,7 +411,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-alpine-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.5-alpine-arm32v7
@@ -530,9 +421,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-alpine
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -542,7 +430,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-alpine-arm32v6
     repo: phasecorex/user-python
     tags:
       - 3.5-alpine-arm32v6
@@ -552,9 +440,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.5-alpine
       - ARCH=arm32v6
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -564,7 +449,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-alpine-amd64
     repo: phasecorex/user-python
     tags:
       - 3.5-alpine-amd64
@@ -574,9 +459,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-alpine
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.5-alpine
   image: plugins/manifest
@@ -588,17 +470,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-2.7
 
 ---
 kind: pipeline
@@ -613,17 +484,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -633,7 +499,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-slim-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.5-slim-arm64v8
@@ -643,9 +509,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-slim
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -655,7 +518,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-slim-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.5-slim-arm32v7
@@ -665,9 +528,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-slim
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -677,7 +537,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-slim-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.5-slim-arm32v5
@@ -687,9 +547,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.5-slim
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -699,7 +556,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-slim-amd64
     repo: phasecorex/user-python
     tags:
       - 3.5-slim-amd64
@@ -709,9 +566,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-slim
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.5-slim
   image: plugins/manifest
@@ -723,17 +577,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.5-alpine
 
 ---
 kind: pipeline
@@ -748,17 +591,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -768,7 +606,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-buster-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.5-arm64v8
@@ -778,9 +616,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.5-buster
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -790,7 +625,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-buster-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.5-arm32v7
@@ -800,9 +635,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.5-buster
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -812,7 +644,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-buster-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.5-arm32v5
@@ -822,9 +654,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.5-buster
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -834,7 +663,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.5-buster-amd64
     repo: phasecorex/user-python
     tags:
       - 3.5-amd64
@@ -844,9 +673,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.5-buster
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.5
   image: plugins/manifest
@@ -858,17 +684,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.5-slim
 
 ---
 kind: pipeline
@@ -883,17 +698,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -903,7 +713,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-alpine-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.6-alpine-arm64v8
@@ -913,9 +723,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-alpine
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -925,7 +732,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-alpine-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.6-alpine-arm32v7
@@ -935,9 +742,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-alpine
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -947,7 +751,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-alpine-arm32v6
     repo: phasecorex/user-python
     tags:
       - 3.6-alpine-arm32v6
@@ -957,9 +761,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.6-alpine
       - ARCH=arm32v6
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -969,7 +770,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-alpine-amd64
     repo: phasecorex/user-python
     tags:
       - 3.6-alpine-amd64
@@ -979,9 +780,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-alpine
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.6-alpine
   image: plugins/manifest
@@ -993,17 +791,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.5
 
 ---
 kind: pipeline
@@ -1018,17 +805,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1038,7 +820,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-slim-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.6-slim-arm64v8
@@ -1048,9 +830,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-slim
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1060,7 +839,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-slim-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.6-slim-arm32v7
@@ -1070,9 +849,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-slim
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -1082,7 +858,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-slim-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.6-slim-arm32v5
@@ -1092,9 +868,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.6-slim
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1104,7 +877,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-slim-amd64
     repo: phasecorex/user-python
     tags:
       - 3.6-slim-amd64
@@ -1114,9 +887,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-slim
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.6-slim
   image: plugins/manifest
@@ -1128,17 +898,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.6-alpine
 
 ---
 kind: pipeline
@@ -1153,17 +912,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1173,7 +927,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-buster-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.6-arm64v8
@@ -1183,9 +937,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.6-buster
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1195,7 +946,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-buster-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.6-arm32v7
@@ -1205,9 +956,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.6-buster
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -1217,7 +965,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-buster-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.6-arm32v5
@@ -1227,9 +975,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.6-buster
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1239,7 +984,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.6-buster-amd64
     repo: phasecorex/user-python
     tags:
       - 3.6-amd64
@@ -1249,9 +994,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.6-buster
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.6
   image: plugins/manifest
@@ -1263,17 +1005,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.6-slim
 
 ---
 kind: pipeline
@@ -1288,17 +1019,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1308,7 +1034,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-alpine-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.7-alpine-arm64v8
@@ -1318,9 +1044,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-alpine
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1330,7 +1053,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-alpine-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.7-alpine-arm32v7
@@ -1340,9 +1063,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-alpine
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -1352,7 +1072,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-alpine-arm32v6
     repo: phasecorex/user-python
     tags:
       - 3.7-alpine-arm32v6
@@ -1362,9 +1082,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.7-alpine
       - ARCH=arm32v6
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1374,7 +1091,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-alpine-amd64
     repo: phasecorex/user-python
     tags:
       - 3.7-alpine-amd64
@@ -1384,9 +1101,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-alpine
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.7-alpine
   image: plugins/manifest
@@ -1398,17 +1112,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.6
 
 ---
 kind: pipeline
@@ -1423,17 +1126,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1443,7 +1141,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-slim-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.7-slim-arm64v8
@@ -1453,9 +1151,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-slim
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1465,7 +1160,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-slim-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.7-slim-arm32v7
@@ -1475,9 +1170,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-slim
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -1487,7 +1179,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-slim-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.7-slim-arm32v5
@@ -1497,9 +1189,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.7-slim
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1509,7 +1198,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-slim-amd64
     repo: phasecorex/user-python
     tags:
       - 3.7-slim-amd64
@@ -1519,9 +1208,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-slim
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.7-slim
   image: plugins/manifest
@@ -1533,17 +1219,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.7-alpine
 
 ---
 kind: pipeline
@@ -1558,17 +1233,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1578,7 +1248,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-buster-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.7-arm64v8
@@ -1588,9 +1258,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.7-buster
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1600,7 +1267,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-buster-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.7-arm32v7
@@ -1610,9 +1277,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.7-buster
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -1622,7 +1286,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-buster-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.7-arm32v5
@@ -1632,9 +1296,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.7-buster
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1644,7 +1305,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.7-buster-amd64
     repo: phasecorex/user-python
     tags:
       - 3.7-amd64
@@ -1654,9 +1315,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.7-buster
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3.7
   image: plugins/manifest
@@ -1668,17 +1326,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.7-slim
 
 ---
 kind: pipeline
@@ -1693,17 +1340,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v6 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1713,7 +1355,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-alpine-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3-alpine-arm64v8
@@ -1724,9 +1366,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.8-alpine
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1736,7 +1375,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-alpine-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3-alpine-arm32v7
@@ -1747,9 +1386,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.8-alpine
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -1759,7 +1395,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-alpine-arm32v6
     repo: phasecorex/user-python
     tags:
       - 3-alpine-arm32v6
@@ -1770,9 +1406,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/python:3.8-alpine
       - ARCH=arm32v6
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1782,7 +1415,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-alpine-amd64
     repo: phasecorex/user-python
     tags:
       - 3-alpine-amd64
@@ -1793,9 +1426,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.8-alpine
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3-alpine
   image: plugins/manifest
@@ -1819,17 +1449,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.7
-
 ---
 kind: pipeline
 name: user-python-3.8-slim
@@ -1843,17 +1462,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -1863,7 +1477,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-slim-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3-slim-arm64v8
@@ -1874,9 +1488,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:3.8-slim
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -1886,7 +1497,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-slim-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3-slim-arm32v7
@@ -1897,9 +1508,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:3.8-slim
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -1909,7 +1517,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-slim-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3-slim-arm32v5
@@ -1920,9 +1528,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:3.8-slim
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -1932,7 +1537,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:3.8-slim-amd64
     repo: phasecorex/user-python
     tags:
       - 3-slim-amd64
@@ -1943,9 +1548,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:3.8-slim
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3-slim
   image: plugins/manifest
@@ -1969,17 +1571,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.8-alpine
-
 ---
 kind: pipeline
 name: user-python-3.8
@@ -1993,17 +1584,12 @@ steps:
 - name: prepare
   image: docker:git
   commands:
-    - mkdir -p /cache/${DRONE_REPO}/docker
-    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-python arm64v8 arm32v7 arm32v5 amd64
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -2013,7 +1599,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:buster-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3-arm64v8
@@ -2025,9 +1611,6 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/python:buster
       - ARCH=arm64v8
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v7
   image: plugins/docker
@@ -2037,7 +1620,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:buster-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3-arm32v7
@@ -2049,9 +1632,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/python:buster
       - ARCH=arm32v7
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-arm32v5
   image: plugins/docker
@@ -2061,7 +1641,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:buster-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3-arm32v5
@@ -2073,9 +1653,6 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v5/python:buster
       - ARCH=arm32v5
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -2085,7 +1662,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    use_cache: true
+    cache_from: phasecorex/user-python:buster-amd64
     repo: phasecorex/user-python
     tags:
       - 3-amd64
@@ -2097,9 +1674,6 @@ steps:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/python:buster
       - ARCH=amd64
-  volumes:
-    - name: docker
-      path: /var/lib/docker
 
 - name: docker-push-manifest-3
   image: plugins/manifest
@@ -2133,17 +1707,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-volumes:
-- name: cache
-  host:
-    path: /var/cache
-- name: docker
-  host:
-    path: /var/cache/${DRONE_REPO}/docker
-
-depends_on:
-  - user-python-3.8-slim
 
 ---
 kind: pipeline
