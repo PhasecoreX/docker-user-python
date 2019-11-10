@@ -270,7 +270,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:2-buster-arm64v8
+    cache_from: phasecorex/user-python:2.7-arm64v8
     repo: phasecorex/user-python
     tags:
       - 2-arm64v8
@@ -290,7 +290,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:2-buster-arm32v7
+    cache_from: phasecorex/user-python:2.7-arm32v7
     repo: phasecorex/user-python
     tags:
       - 2-arm32v7
@@ -310,7 +310,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:2-buster-arm32v5
+    cache_from: phasecorex/user-python:2.7-arm32v5
     repo: phasecorex/user-python
     tags:
       - 2-arm32v5
@@ -330,7 +330,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:2-buster-amd64
+    cache_from: phasecorex/user-python:2.7-amd64
     repo: phasecorex/user-python
     tags:
       - 2-amd64
@@ -606,7 +606,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.5-buster-arm64v8
+    cache_from: phasecorex/user-python:3.5-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.5-arm64v8
@@ -625,7 +625,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.5-buster-arm32v7
+    cache_from: phasecorex/user-python:3.5-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.5-arm32v7
@@ -644,7 +644,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.5-buster-arm32v5
+    cache_from: phasecorex/user-python:3.5-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.5-arm32v5
@@ -663,7 +663,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.5-buster-amd64
+    cache_from: phasecorex/user-python:3.5-amd64
     repo: phasecorex/user-python
     tags:
       - 3.5-amd64
@@ -927,7 +927,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.6-buster-arm64v8
+    cache_from: phasecorex/user-python:3.6-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.6-arm64v8
@@ -946,7 +946,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.6-buster-arm32v7
+    cache_from: phasecorex/user-python:3.6-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.6-arm32v7
@@ -965,7 +965,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.6-buster-arm32v5
+    cache_from: phasecorex/user-python:3.6-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.6-arm32v5
@@ -984,7 +984,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.6-buster-amd64
+    cache_from: phasecorex/user-python:3.6-amd64
     repo: phasecorex/user-python
     tags:
       - 3.6-amd64
@@ -1248,7 +1248,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.7-buster-arm64v8
+    cache_from: phasecorex/user-python:3.7-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3.7-arm64v8
@@ -1267,7 +1267,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.7-buster-arm32v7
+    cache_from: phasecorex/user-python:3.7-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3.7-arm32v7
@@ -1286,7 +1286,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.7-buster-arm32v5
+    cache_from: phasecorex/user-python:3.7-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3.7-arm32v5
@@ -1305,7 +1305,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:3.7-buster-amd64
+    cache_from: phasecorex/user-python:3.7-amd64
     repo: phasecorex/user-python
     tags:
       - 3.7-amd64
@@ -1599,7 +1599,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:buster-arm64v8
+    cache_from: phasecorex/user-python:3.8-arm64v8
     repo: phasecorex/user-python
     tags:
       - 3-arm64v8
@@ -1620,7 +1620,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:buster-arm32v7
+    cache_from: phasecorex/user-python:3.8-arm32v7
     repo: phasecorex/user-python
     tags:
       - 3-arm32v7
@@ -1641,7 +1641,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:buster-arm32v5
+    cache_from: phasecorex/user-python:3.8-arm32v5
     repo: phasecorex/user-python
     tags:
       - 3-arm32v5
@@ -1662,7 +1662,7 @@ steps:
     password:
       from_secret: docker_password
     create_repository: true
-    cache_from: phasecorex/user-python:buster-amd64
+    cache_from: phasecorex/user-python:3.8-amd64
     repo: phasecorex/user-python
     tags:
       - 3-amd64
