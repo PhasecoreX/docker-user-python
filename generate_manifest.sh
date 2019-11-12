@@ -1,12 +1,12 @@
 #!/bin/sh
-# Generate .manifest.tmpl
+# Generate manifest.tmpl
 
 docker_image=${1}
 shift
 archs_filtered=${@}
 
-cat << EOF > ./.manifest.tmpl
-image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
+cat << EOF > ./manifest.tmpl
+image: phasecorex/${docker_image}-test:{{#if build.tag}}{{trimPrefix "v" build.tag}}{{else}}latest{{/if}}
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
@@ -27,16 +27,16 @@ for arch in ${archs_filtered}; do
             echo ERROR: Unknown tag arch.
             exit 1
     esac
-    cat << EOF >> ./.manifest.tmpl
+    cat << EOF >> ./manifest.tmpl
   -
-    image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}${arch}
+    image: phasecorex/${docker_image}-test:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}${arch}
     platform:
       architecture: ${tag_arch}
       os: ${os}
 EOF
 
     if [[ ! -z ${variant} ]]; then
-        cat << EOF >> ./.manifest.tmpl
+        cat << EOF >> ./manifest.tmpl
       variant: ${variant}
 EOF
     fi
