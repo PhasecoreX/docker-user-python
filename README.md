@@ -1,8 +1,9 @@
 # User Python
 Base Python image that steps down from root into a runtime-defined non-privileged user
 
-[![Build Status](https://cloud.drone.io/api/badges/PhasecoreX/docker-user-python/status.svg)](https://cloud.drone.io/PhasecoreX/docker-user-python)
+[![Docker Pulls](https://img.shields.io/docker/pulls/phasecorex/user-python)](https://hub.docker.com/r/phasecorex/user-python)
 [![Image Size](https://images.microbadger.com/badges/image/phasecorex/user-python.svg)](https://microbadger.com/images/phasecorex/user-python)
+[![Build Status](https://cloud.drone.io/api/badges/PhasecoreX/docker-user-python/status.svg)](https://cloud.drone.io/PhasecoreX/docker-user-python)
 [![Donate to support my code](https://img.shields.io/badge/Paypal-Donate-blue.svg)](https://paypal.me/pcx)
 
 ## Note

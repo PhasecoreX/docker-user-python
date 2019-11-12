@@ -1,32 +1,16 @@
 def main(ctx):
-    # image_name = "ubuntu"
-    # all_image_tags_arches = [
-    #     {
-    #         "tags": ["18.04", "bionic", "latest"],
-    #         "arches": ["amd64", "arm32v7", "arm64v8"],
-    #         "base_tag": "base_tag_test",
-    #         "dockerfile": "debian",
-    #     },
-    #     {
-    #         "tags": ["20.04", "focal", "devel"],
-    #         "arches": ["amd64", "arm32v7", "arm64v8"],
-    #         "dockerfile": "debian",
-    #     },
-    #     {
-    #         "tags": ["16.04", "xenial"],
-    #         "arches": ["amd64", "arm32v7", "arm64v8"],
-    #         "dockerfile": "debian",
-    #     },
-    # ]
-    # downstream_builds = ["PhasecoreX/docker-red-discordbot", "nice", "lol"]
-    image_name = "python"
-    all_image_tags_arches = [{'tags': ['2.7-alpine', '2-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'alpine'}, {'tags': ['2.7-slim', '2-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'debian'}, {'tags': ['2.7', '2'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '2-buster', 'dockerfile': 'debian'}, {'tags': ['3.5-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'alpine'}, {'tags': ['3.5-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'debian'}, {'tags': ['3.5'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.5-buster', 'dockerfile': 'debian'}, {'tags': ['3.6-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'alpine'}, {'tags': ['3.6-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'debian'}, {'tags': ['3.6'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.6-buster', 'dockerfile': 'debian'}, {'tags': ['3.7-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'alpine'}, {'tags': ['3.7-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'debian'}, {'tags': ['3.7'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.7-buster', 'dockerfile': 'debian'}, {'tags': ['3.8-alpine', '3-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'alpine'}, {'tags': ['3.8-slim', '3-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'debian'}, {'tags': ['latest', '3.8', '3'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': 'buster', 'dockerfile': 'debian'}]
-    downstream_builds = None
+    image_name = "phasecorex/user-python"
+    base_image_name = "library/python"
+    all_image_tags_arches = [{'tags': ['2.7-alpine', '2-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['2.7-slim', '2-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['2.7', '2'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '2-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.5-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.5-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.5'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.5-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.6-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.6-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.6'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.6-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.7-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.7-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.7'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.7-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.8-alpine', '3-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.8-slim', '3-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['latest', '3.8', '3'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': 'buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}]
+    other_options = {
+        "downstream_builds": ['PhasecoreX/docker-red-discordbot'],
+        "pre_build_commands": {'image': 'docker:git', 'commands': ['git submodule update --init --recursive', 'echo "Pulled latest template files:"', 'ls -1 docker-user-image']},
+    }
 
-    return generate(image_name, all_image_tags_arches, downstream_builds)
+    return generate(image_name, base_image_name, all_image_tags_arches, other_options)
 
 
-def generate(image_name, all_image_tags_arches, downstream_builds):
+def generate(image_name, base_image_name, all_image_tags_arches, other_options):
     depends_on_manifests = []
     for image_tags_arches in all_image_tags_arches:
         depends_on_manifests.append(
@@ -34,40 +18,68 @@ def generate(image_name, all_image_tags_arches, downstream_builds):
         )
 
     result = (
-        gather_all_pipeline_build(image_name, all_image_tags_arches)
+        gather_all_pipeline_build(
+            image_name, base_image_name, all_image_tags_arches, other_options
+        )
         + gather_all_pipeline_manifest(image_name, all_image_tags_arches)
         + [pipeline_notify(depends_on_manifests)]
     )
-    if downstream_builds:
+    if (
+        "downstream_builds" in other_options
+        and other_options["downstream_builds"] != None
+    ):
         result.append(
-            pipeline_downstream_build(depends_on_manifests, downstream_builds)
+            pipeline_downstream_build(
+                depends_on_manifests, other_options["downstream_builds"]
+            )
         )
     return result
 
 
-def gather_all_pipeline_build(image_name, all_image_tags_arches):
+def gather_all_pipeline_build(
+    image_name, base_image_name, all_image_tags_arches, other_options
+):
     # One for each architecture
     result = []
     all_arches = {}
     for image_tags_arches in all_image_tags_arches:
         for image_arch in image_tags_arches["arches"]:
+            base_image = base_image_name
+            if base_image.startswith("library/"):
+                if ":" in base_image_name:
+                    base_image = "{image_arch}/{image_name}".format(
+                        image_arch=image_arch, image_name=base_image_name[8:]
+                    )
+                else:
+                    base_tag = (
+                        image_tags_arches["base_tag"]
+                        if "base_tag" in image_tags_arches
+                        else _correct_image_tag(image_tags_arches["tags"])
+                    )
+                    base_image = "{image_arch}/{image_name}:{tag}".format(
+                        image_arch=image_arch,
+                        image_name=base_image_name[8:],
+                        tag=base_tag,
+                    )
+            else:
+                base_image += "-" + image_arch
             arch_dict_value = {
-                "tags": image_tags_arches["tags"],
-                "dockerfile": image_tags_arches["dockerfile"],
-                "base_tag": (
-                    image_tags_arches["base_tag"]
-                    if "base_tag" in image_tags_arches
-                    else None
+                "base_image": base_image,
+                "dockerfile": (
+                    image_tags_arches["dockerfile"]
+                    if "dockerfile" in image_tags_arches
+                    else "Dockerfile"
                 ),
+                "tags": image_tags_arches["tags"],
             }
             if image_arch in all_arches:
                 all_arches[image_arch].append(arch_dict_value)
             else:
                 all_arches[image_arch] = [arch_dict_value]
     for image_arch, arch_infos in all_arches.items():
-        # [{"base_tag": "18.04", "dockerfile": "debian", "tags": ["18.04", "bionic", "latest"]},...]
+        # [{"base_image": "amd64/ubuntu:18.04", "dockerfile": "Dockerfile.debian", "tags": ["18.04", "bionic", "latest"]},...]
         # pipeline_build(image_name, "amd64", ^^^)
-        result.append(pipeline_build(image_name, image_arch, arch_infos))
+        result.append(pipeline_build(image_name, image_arch, arch_infos, other_options))
     return result
 
 
@@ -84,18 +96,19 @@ def gather_all_pipeline_manifest(image_name, all_image_tags_arches):
     return result
 
 
-def pipeline_build(image_name, image_arch, arch_infos):
-    steps = [get_build_prepare_step(image_name, image_arch)]
-    for info in arch_infos:
+def pipeline_build(image_name, image_arch, arch_infos, other_options):
+    steps = []
+    if "pre_build_commands" in other_options:
         steps.append(
-            get_build_step(
+            get_build_prepare_step(
                 image_name,
                 image_arch,
-                info["tags"],
-                info["dockerfile"],
-                info["base_tag"],
+                other_options["pre_build_commands"]["image"],
+                other_options["pre_build_commands"]["commands"],
             )
         )
+    for arch_info in arch_infos:
+        steps.append(get_build_step(image_name, image_arch, arch_info, other_options))
     return {
         "kind": "pipeline",
         "name": _get_pipeline_build_name(image_name, image_arch),
@@ -115,7 +128,10 @@ def pipeline_manifest(image_name, image_tags, image_arches):
         "kind": "pipeline",
         "name": _get_pipeline_manifest_name(image_name, image_tags),
         "trigger": _get_trigger(),
-        "depends_on": ["build-user-" + image_name + "-" + s for s in image_arches],
+        "depends_on": [
+            "build-" + _get_image_name_without_repo(image_name) + "-" + s
+            for s in image_arches
+        ],
         "steps": [get_manifest_generate_step(image_name, image_tag, image_arches)]
         + [get_manifest_step(image_name, image_tag) for image_tag in image_tags],
     }
@@ -166,49 +182,52 @@ def pipeline_downstream_build(depends_on, downstream_images):
     }
 
 
-def get_build_prepare_step(image_name, image_arch):
+def get_build_prepare_step(image_name, image_arch, image, commands):
     return {
-        "name": "prepare-build-user-{image_name}-{image_arch}".format(
-            image_name=image_name, image_arch=image_arch
+        "name": "prepare-build-{image_name}-{image_arch}".format(
+            image_name=_get_image_name_without_repo(image_name), image_arch=image_arch
         ),
-        "image": "docker:git",
-        "commands": [
-            "git submodule update --init --recursive",
-            'echo "Pulled latest template files:"',
-            "ls -1 docker-user-image",
-        ],
+        "image": image,
+        "commands": commands,
     }
 
 
-def get_build_step(image_name, image_arch, image_tags, dockerfile, image_base_tag):
+def get_build_step(image_name, image_arch, arch_info, other_options):
+    image_tags = arch_info["tags"]
     image_tag = _correct_image_tag(image_tags)
-    if not image_base_tag:
-        image_base_tag = image_tag
+    dockerfile = arch_info["dockerfile"]
+    base_image = arch_info["base_image"]
+    build_args_from_env = (
+        other_options["build_args_from_env"]
+        if "build_args_from_env" in other_options
+        else []
+    )
     return {
-        "name": "build-user-{image_name}-{image_tag}-{image_arch}".format(
-            image_name=image_name, image_tag=image_tag, image_arch=image_arch
+        "name": "build-{image_name}-{image_tag}-{image_arch}".format(
+            image_name=_get_image_name_without_repo(image_name),
+            image_tag=image_tag,
+            image_arch=image_arch,
         ),
         "image": "plugins/docker",
         "settings": {
             "username": {"from_secret": "docker_username"},
             "password": {"from_secret": "docker_password"},
             "create_repository": True,
-            "cache_from": "phasecorex/user-{name}:{image_tag}-{arch}".format(
-                name=image_name, image_tag=image_tag, arch=image_arch
+            "cache_from": "{image_name}:{image_tag}-{arch}".format(
+                image_name=image_name, image_tag=image_tag, arch=image_arch
             ),
-            "repo": "phasecorex/user-{name}-test".format(name=image_name),
+            "repo": "{image_name}".format(image_name=image_name),
             "tags": [s + "-" + image_arch for s in image_tags],
             "context": "docker-user-image",
-            "dockerfile": "docker-user-image/Dockerfile.{dockerfile}".format(
+            "dockerfile": "{dockerfile}".format(
                 dockerfile=dockerfile + (".qemu" if image_arch != "amd64" else "")
             ),
             "build_args": [
                 "QEMU_ARCH={qemu_arch}".format(qemu_arch=_get_qemu_arch(image_arch)),
-                "ARCH_IMG={arch}/{name}:{tag}".format(
-                    arch=image_arch, name=image_name, tag=image_base_tag
-                ),
+                "BASE_IMG={base_image}".format(base_image=base_image),
                 "ARCH={arch}".format(arch=image_arch),
             ],
+            "build_args_from_env": build_args_from_env,
         },
     }
 
@@ -216,13 +235,14 @@ def get_build_step(image_name, image_arch, image_tags, dockerfile, image_base_ta
 def get_manifest_generate_step(image_name, image_tag, image_arches):
     image_arches_string = " ".join(image_arches)
     return {
-        "name": "prepare-manifest-user-{image_name}-{image_tag}".format(
-            image_name=image_name, image_tag=image_tag
+        "name": "prepare-manifest-{image_name}-{image_tag}".format(
+            image_name=_get_image_name_without_repo(image_name), image_tag=image_tag
         ),
         "image": "docker:git",
         "commands": [
-            "./generate_manifest.sh user-{image_name} {image_arches_string}".format(
-                image_name=image_name, image_arches_string=image_arches_string
+            "./generate_manifest.sh {image_name} {image_arches_string}".format(
+                image_name=_get_image_name_without_repo(image_name),
+                image_arches_string=image_arches_string,
             ),
             'echo "Generated docker manifest template:"',
             "cat manifest.tmpl",
@@ -232,8 +252,8 @@ def get_manifest_generate_step(image_name, image_tag, image_arches):
 
 def get_manifest_step(image_name, image_tag):
     return {
-        "name": "manifest-user-{image_name}-{image_tag}".format(
-            image_name=image_name, image_tag=image_tag
+        "name": "manifest-{image_name}-{image_tag}".format(
+            image_name=_get_image_name_without_repo(image_name), image_tag=image_tag
         ),
         "image": "plugins/manifest",
         "environment": {"DRONE_TAG": "{image_tag}".format(image_tag=image_tag)},
@@ -243,6 +263,10 @@ def get_manifest_step(image_name, image_tag):
             "spec": "manifest.tmpl",
         },
     }
+
+
+def _get_image_name_without_repo(image_name):
+    return image_name.split("/")[1]
 
 
 def _get_drone_arch(image_arch):
@@ -280,12 +304,13 @@ def _correct_image_tag(image_tags):
 
 
 def _get_pipeline_build_name(image_name, image_arch):
-    return "build-user-{image_name}-{image_arch}".format(
-        image_name=image_name, image_arch=image_arch
+    return "build-{image_name}-{image_arch}".format(
+        image_name=_get_image_name_without_repo(image_name), image_arch=image_arch
     )
 
 
 def _get_pipeline_manifest_name(image_name, image_tags):
-    return "manifest-user-{image_name}-{image_tag}".format(
-        image_name=image_name, image_tag=_correct_image_tag(image_tags)
+    return "manifest-{image_name}-{image_tag}".format(
+        image_name=_get_image_name_without_repo(image_name),
+        image_tag=_correct_image_tag(image_tags),
     )
