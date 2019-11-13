@@ -3,8 +3,16 @@ def main(ctx):
     base_image_name = "library/python"
     all_image_tags_arches = [{'tags': ['2.7-alpine', '2-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['2.7-slim', '2-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['2.7', '2'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '2-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.5-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.5-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.5'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.5-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.6-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.6-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.6'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.6-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.7-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.7-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.7'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': '3.7-buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['3.8-alpine', '3-alpine'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.8-slim', '3-slim'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.debian'}, {'tags': ['latest', '3.8', '3'], 'arches': ['arm64v8', 'arm32v7', 'arm32v5', 'amd64'], 'base_tag': 'buster', 'dockerfile': 'docker-user-image/Dockerfile.debian'}]
     other_options = {
+        "pre_build_commands": {
+            "image": "docker:git",
+            "commands": [
+                "git submodule update --init --recursive",
+                'echo "Pulled latest template files:"',
+                "ls -1 docker-user-image",
+            ],
+        },
+        "context": "docker-user-image",
         "downstream_builds": ['PhasecoreX/docker-red-discordbot'],
-        "pre_build_commands": {'image': 'docker:git', 'commands': ['git submodule update --init --recursive', 'echo "Pulled latest template files:"', 'ls -1 docker-user-image']},
     }
 
     return generate(image_name, base_image_name, all_image_tags_arches, other_options)
@@ -202,6 +210,7 @@ def get_build_step(image_name, image_arch, arch_info, other_options):
         if "build_args_from_env" in other_options
         else []
     )
+    context = other_options["context"] if "context" in other_options else ""
     return {
         "name": "build-{image_name}-{image_tag}-{image_arch}".format(
             image_name=_get_image_name_without_repo(image_name),
@@ -218,12 +227,9 @@ def get_build_step(image_name, image_arch, arch_info, other_options):
             ),
             "repo": "{image_name}".format(image_name=image_name),
             "tags": [s + "-" + image_arch for s in image_tags],
-            "context": "docker-user-image",
-            "dockerfile": "{dockerfile}".format(
-                dockerfile=dockerfile + (".qemu" if image_arch != "amd64" else "")
-            ),
+            "context": context,
+            "dockerfile": "{dockerfile}".format(dockerfile=dockerfile),
             "build_args": [
-                "QEMU_ARCH={qemu_arch}".format(qemu_arch=_get_qemu_arch(image_arch)),
                 "BASE_IMG={base_image}".format(base_image=base_image),
                 "ARCH={arch}".format(arch=image_arch),
             ],
@@ -277,16 +283,6 @@ def _get_drone_arch(image_arch):
     if image_arch.startswith("arm64"):
         return "arm64", "v8"
     return "ERROR_GET_DRONE_ARCH_" + image_arch
-
-
-def _get_qemu_arch(image_arch):
-    if image_arch == "amd64":
-        return "x86_64"
-    if image_arch.startswith("arm32"):
-        return "arm"
-    if image_arch.startswith("arm64"):
-        return "aarch64"
-    return "ERROR_GET_QEMU_ARCH_" + image_arch
 
 
 def _get_trigger(any_status=False):
