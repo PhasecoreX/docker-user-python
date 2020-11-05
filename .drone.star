@@ -12,7 +12,7 @@ def main(ctx):
             ],
         },
         "context": "docker-user-image",
-        "downstream_builds": ['PhasecoreX/docker-red-discordbot'],
+        "downstream_builds": None,
     }
 
     return generate(image_name, base_image_name, all_image_tags_arches, other_options)
